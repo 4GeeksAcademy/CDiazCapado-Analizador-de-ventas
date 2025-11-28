@@ -35,8 +35,18 @@ def total_sales_by_product(data, product_key):
 
 def average_daily_sales(data, product_key):
     """Calculates the average daily sales of a specific product."""
-    pass
+    ventaAcumulada = 0
+    for ventasDia in data:
+        if product_key in ventasDia:
+            ventaAcumulada = ventaAcumulada + ventasDia[product_key]
+    numeroDias = len(data)
 
+    if numeroDias > 0:
+        ventasPromedio = ventaAcumulada / numeroDias
+        return ventasPromedio
+    else:
+        #Por si algun dia esta vacio
+        return 0
 
 def best_selling_day(data):
     """Finds the day with the highest total sales."""
