@@ -50,8 +50,24 @@ def average_daily_sales(data, product_key):
 
 def best_selling_day(data):
     """Finds the day with the highest total sales."""
-    pass
+    mejorSumaVentas = 0
+    mejorDiaVentas = 0
 
+    for ventasDia in data:
+        a = ventasDia["product_a"]
+        b = ventasDia["product_b"]
+        c = ventasDia["product_c"]
+
+        sumaTotalDia = a + b + c
+        #comparo la sumatotal con la que tengo hasta ahora como mejor suma
+        if sumaTotalDia > mejorSumaVentas:
+            mejorSumaVentas = sumaTotalDia
+            mejorDiaVentas = ventasDia["day"]
+        else:
+            #sino es mayor sigo con el resto de dias y mantengo el mismo valor que antes
+            mejorSumaVentas = mejorSumaVentas
+
+    return mejorDiaVentas
 
 def days_above_threshold(data, product_key, threshold):
     """Counts how many days the sales of a product exceeded a given threshold."""
