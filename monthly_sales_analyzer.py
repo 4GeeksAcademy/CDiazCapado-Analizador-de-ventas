@@ -86,7 +86,30 @@ def days_above_threshold(data, product_key, threshold):
 
 def top_product(data):
     """Determines which product had the highest total sales in 30 days."""
-    pass
+    totalVentas_a = 0
+    totalVentas_b = 0
+    totalVentas_c = 0
+
+    for ventasDia in data:
+        totalVentas_a = totalVentas_a + ventasDia["product_a"]
+        totalVentas_b = totalVentas_b + ventasDia["product_b"]
+        totalVentas_c = totalVentas_c + ventasDia["product_c"]
+    
+    #comparo producto por producto por partes
+
+    if totalVentas_a > totalVentas_b:
+        if totalVentas_a > totalVentas_c:
+            productoMasVendido = "product_a"
+        else:
+            productoMasVendido = "product_c"
+    else:
+        if totalVentas_b > totalVentas_c:
+            productoMasVendido = "product_b"
+        else:
+            productoMasVendido = "product_c"
+
+    return productoMasVendido
+ 
 
 
 
