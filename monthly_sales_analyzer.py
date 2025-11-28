@@ -24,27 +24,92 @@ sales_data = [
 
 def total_sales_by_product(data, product_key):
     """Calculates the total sales of a specific product in 30 days."""
-    pass
+    ventasTotalesProducto = 0
+    for ventasDia in data:
+        if product_key in ventasDia:
+            ventaProductoDia =ventasDia[product_key]
+            ventasTotalesProducto =ventasTotalesProducto + ventaProductoDia
+
+    return ventasTotalesProducto
 
 
 def average_daily_sales(data, product_key):
     """Calculates the average daily sales of a specific product."""
-    pass
+    ventaAcumulada = 0
+    for ventasDia in data:
+        if product_key in ventasDia:
+            ventaAcumulada = ventaAcumulada + ventasDia[product_key]
+    numeroDias = len(data)
 
+    if numeroDias > 0:
+        ventasPromedio = ventaAcumulada / numeroDias
+        return ventasPromedio
+    else:
+        #Por si algun dia esta vacio
+        return 0
 
 def best_selling_day(data):
     """Finds the day with the highest total sales."""
-    pass
+    mejorSumaVentas = 0
+    mejorDiaVentas = 0
 
+    for ventasDia in data:
+        a = ventasDia["product_a"]
+        b = ventasDia["product_b"]
+        c = ventasDia["product_c"]
+
+        sumaTotalDia = a + b + c
+        #comparo la sumatotal con la que tengo hasta ahora como mejor suma
+        if sumaTotalDia > mejorSumaVentas:
+            mejorSumaVentas = sumaTotalDia
+            mejorDiaVentas = ventasDia["day"]
+        else:
+            #sino es mayor sigo con el resto de dias y mantengo el mismo valor que antes
+            mejorSumaVentas = mejorSumaVentas
+
+    return mejorDiaVentas
 
 def days_above_threshold(data, product_key, threshold):
     """Counts how many days the sales of a product exceeded a given threshold."""
-    pass
+    contadorDias = 0
+    for ventasDia in data:
+        if product_key in ventasDia:
+            valorVentasProducto = ventasDia[product_key]
+
+            if valorVentasProducto > threshold:
+                contadorDias = contadorDias + 1
+            else:
+                contadorDias = contadorDias
+
+    return contadorDias
 
 
 def top_product(data):
     """Determines which product had the highest total sales in 30 days."""
-    pass
+    totalVentas_a = 0
+    totalVentas_b = 0
+    totalVentas_c = 0
+
+    for ventasDia in data:
+        totalVentas_a = totalVentas_a + ventasDia["product_a"]
+        totalVentas_b = totalVentas_b + ventasDia["product_b"]
+        totalVentas_c = totalVentas_c + ventasDia["product_c"]
+    
+    #comparo producto por producto por partes
+
+    if totalVentas_a > totalVentas_b:
+        if totalVentas_a > totalVentas_c:
+            productoMasVendido = "product_a"
+        else:
+            productoMasVendido = "product_c"
+    else:
+        if totalVentas_b > totalVentas_c:
+            productoMasVendido = "product_b"
+        else:
+            productoMasVendido = "product_c"
+
+    return productoMasVendido
+ 
 
 
 
