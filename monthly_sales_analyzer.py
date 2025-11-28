@@ -71,7 +71,17 @@ def best_selling_day(data):
 
 def days_above_threshold(data, product_key, threshold):
     """Counts how many days the sales of a product exceeded a given threshold."""
-    pass
+    contadorDias = 0
+    for ventasDia in data:
+        if product_key in ventasDia:
+            valorVentasProducto = ventasDia[product_key]
+
+            if valorVentasProducto > threshold:
+                contadorDias = contadorDias + 1
+            else:
+                contadorDias = contadorDias
+
+    return contadorDias
 
 
 def top_product(data):
